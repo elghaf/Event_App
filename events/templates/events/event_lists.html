@@ -1,0 +1,41 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="display-4 text-primary text-center mb-4">Events</h1>
+
+        {% for event in event_lists %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    {{ event.name }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Chef Name: {{ event.manager }}</h5>
+                    <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Date:</strong> {{ event.event_date|date:"F j, Y, P" }}</li>
+                            <li class="list-group-item"><strong>Days Till Event:</strong> {{ event.Days_till|default:"N/A" }}</li>
+                            <li class="list-group-item"><strong>Occured:</strong> {{ event.Is_Past|default:"N/A" }}</li>
+                            <li class="list-group-item"><strong>Venue Website:</strong> {{ event.venue.web|default:"N/A" }}</li>
+                            <li class="list-group-item"><strong>Description:</strong> {{ event.description|default:"N/A" }}</li>
+                            <li class="list-group-item"><strong>Approved:</strong> {{ event.approved }}</li>
+                            <li class="list-group-item"><strong>Attendees:</strong><br/>
+                                {% for user in event.attendees.all %}
+                                    {{ user }}<br/>
+                                {% empty %}
+                                    No attendees<br/>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                {% if user.is_authenticated and user == event.manager %}
+                    <div class="card-footer text-muted text-center">
+                        <a href="{% url 'update-event' event.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+                        <a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

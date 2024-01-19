@@ -1,0 +1,25 @@
+﻿{% extends "events/base.html" %}
+{% block title %}Add Event Page{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow p-4 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Add Event</h1>
+                    {% if not submitted %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="text-center mt-4">
+                                <input type="submit" value="Submit Event" class="btn btn-success me-md-2">
+                                <a href="{% url 'event_lists' %}" class="btn btn-dark me-md-2">Back to Events List</a>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

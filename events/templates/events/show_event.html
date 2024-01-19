@@ -1,0 +1,52 @@
+﻿{% extends "events/base.html" %}
+{% block title %}Event Page{% endblock %}
+{% block content %}
+
+<center>
+    <h1><strong>{{ event }}</strong></h1>
+</center>
+
+<br>
+
+<div class="card border-dark mb-4">
+    <div class="card-header text-center">
+        <strong>Status : </strong>
+
+        {% if event.event_date|date:"Y-m-d" < datetime.date|date:"Y-m-d" %}<b class="link-danger">Finished</b>
+            {% elif event.event_date|date:"Y-m-d" > datetime.date|date:"Y-m-d" %}
+            <b class="link-success">Upcoming</b>
+            {% else %}
+            {% if event.event_date.time|time:"H:i:s" > datetime.time|time:"H:i:s" %}
+            <b class="link-success">Upcoming</b>
+            {% else %}
+            <b class="link-danger">Finished</b>
+            {% endif %}
+            {% endif %}
+
+    </div>
+    <div class="card-body">
+        <ul>
+            <li><strong>Date :</strong> {{ event.event_date }}</li>
+            <!-- Other details here -->
+        </ul>
+    </div>
+
+    <div class="card-footer text-body-secondary">
+        <a href="{% url 'event_lists' %}" class="btn btn-dark me-md-2">Back to Events List</a>
+        {% if user.is_authenticated %}
+        {% if user == event.manager %}
+        {% if event.event_date|date:"Y-m-d" > datetime.date|date:"Y-m-d" %}
+        <a href="{% url 'update-event' event.id %}" class="btn btn-success me-md-2">Update Event</a>
+        <a href="{% url 'delete-event' event.id %}" class="btn btn-danger me-md-2">Delete Event</a>
+        {% elif event.event_date|date:"Y-m-d" == datetime.date|date:"Y-m-d" %}
+        {% if event.event_date.time|time:"H:i:s" > datetime.time|time:"H:i:s" %}
+        <a href="{% url 'update-event' event.id %}" class="btn btn-success me-md-2">Update Event</a>
+        <a href="{% url 'delete-event' event.id %}" class="btn btn-danger me-md-2">Delete Event</a>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

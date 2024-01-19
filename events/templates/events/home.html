@@ -1,0 +1,59 @@
+﻿{% extends 'events/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="display-4 text-primary">Hello {{ name }}! Events For {{ month }} {{ year }}</h1>
+                <p class="lead text-muted">As of {{ time }}</p>
+            </div>
+        </div>
+
+		{% if user.is_authenticated %}
+			<div class="row mt-5">
+				<div class="col-md-12 text-center">
+					<a href="{% url 'add-event' %}" class="btn btn-outline-primary btn-lg">Add Event</a>
+				</div>
+			</div>
+		
+		<div class="container mt-5">
+			<h1 class="display-4 text-primary text-center mb-4">My Events</h1>
+			
+			{% for event in events %}
+				<div class="card mb-4">
+					<div class="card-header bg-primary text-white">
+						{{ event.name }}
+					</div>
+					<div class="card-body">
+						<p class="card-text">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"><strong>Date:</strong> {{ event.event_date|date:"F j, Y, P" }}</li>
+								<li class="list-group-item"><strong>Manager:</strong> {{ event.manager|default:"N/A" }}</li>
+								<li class="list-group-item"><strong>Description:</strong> {{ event.description|default:"N/A" }}</li>
+								<li class="list-group-item"><strong>Approved:</strong> {{ event.approved }}</li>
+								<li class="list-group-item"><strong>Event ID:</strong> {{ event.id }}</li>
+								<!-- Add more lines here to display other attributes of the event -->
+								<!-- <li class="list-group-item"><strong>Attribute Name:</strong> {{ event.attribute_name }}</li> -->
+								<!-- ... -->
+							</ul>
+						</p>
+					</div>
+					{% if user.is_authenticated and user == event.manager %}
+						<div class="card-footer text-muted text-center">
+							<a href="{% url 'update-event' event.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+							<a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+						</div>
+					{% endif %}
+				</div>
+			{% empty %}
+				<p class="text-center">No events found.</p>
+			{% endfor %}
+		</div>
+		{% endif %}
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <p class="lead text-muted">Created this: {{ current_year }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

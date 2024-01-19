@@ -1,0 +1,62 @@
+/* Custom CSS styles */
+body {
+    background-color: #f8f9fa;
+    padding-top: 56px; /* Adjust according to your navbar height */
+}
+
+.custom-navbar {
+    background-color: #dc3545; /* Red color for the navbar */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #f8d7da; /* Light red for inactive links */
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link.active,
+.navbar-nav .nav-item .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    background-color: #dc3545;
+}
+
+.dropdown-item {
+    color: #f8d7da;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #b21f2d; /* Darker red on hover/focus */
+    color: #fff;
+}
+
+.form-control,
+.btn {
+    margin-top: 0.5em;
+}
+
+.form-control {
+    border: 1px solid #b21f2d; /* Darker red border for input */
+    background-color: #dc3545; /* Red background for input */
+    color: #fff;
+}
+
+.btn-dark {
+    background-color: #b21f2d; /* Darker red for buttons */
+    border-color: #b21f2d;
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background-color: #66151d; /* Even darker red on hover/focus */
+    border-color: #66151d;
+}

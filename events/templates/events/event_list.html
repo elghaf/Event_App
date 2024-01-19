@@ -1,0 +1,44 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    <h1>Events</h1>
+    <br/>
+    
+    {% for event in event_lists %}
+        {% if event.approved %}
+            <div class="card">
+                <div class="card-header">
+                    {{ event }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Venue: {{ event.venue }}</h5>
+                    <p class="card-text">
+                        <ul>
+                            <li>Date: {{ event.event_date|date:"F j, Y, P" }}</li>
+                            <li>Days Till Event: {{ event.Days_till|default:"N/A" }}</li>
+                            <li>Occured: {{ event.Is_Past|default:"N/A" }}</li>
+                            <li>Venue Website: {{ event.venue.web|default:"N/A" }}</li>
+                            <li>Manager: {{ event.manager|default:"N/A" }}</li>
+                            <li>Description: {{ event.description|default:"N/A" }}</li>
+                            <li>Approved: {{ event.approved }}</li>
+                            <li>Attendees:<br/>
+                                {% for user in event.attendees.all %}
+                                    {{ user }}<br/>
+                                {% empty %}
+                                    No attendees<br/>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                {% if user.is_authenticated and user == event.manager %}
+                    <div class="card-footer text-muted">
+                        <a href="{% url 'update-event' event.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+                        <a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+                    </div>
+                {% endif %}
+            </div>
+            <br/><br/>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

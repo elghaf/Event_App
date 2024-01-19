@@ -1,0 +1,15 @@
+﻿{% extends "events/base.html" %}
+{% block title %}Update Event Page{% endblock %}
+{% block content %}
+<center>
+    <h1>Update Event - {{ event.name }}</h1>
+</center>
+<br>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update Event" class="btn btn-success me-md-2">
+    <a href="{% url 'event_lists' %}" class="btn btn-dark me-md-2">Back to Event List</a>
+
+</form>
+{% endblock %}
