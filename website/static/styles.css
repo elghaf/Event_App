@@ -1,0 +1,60 @@
+body {
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.custom-navbar {
+    background-color: #e44d26; /* Red-Orange color */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff; /* White text */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #fff; /* White text */
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link.active,
+.navbar-nav .nav-item .nav-link:hover {
+    color: #000; /* Black text on hover */
+    background-color: #ffc107; /* Yellow color on hover */
+}
+
+.dropdown-menu {
+    background-color: #e44d26; /* Red-Orange color for dropdown */
+}
+
+.dropdown-item {
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #ffc107; /* Yellow color on hover */
+    color: #000; /* Black text on hover */
+}
+
+.form-control,
+.btn {
+    margin-top: 0.5em;
+}
+
+.form-control {
+    border: 1px solid #e44d26; /* Red-Orange color for border */
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+}
+
+.btn-dark {
+    background-color: #e44d26; /* Red-Orange color */
+    border-color: #e44d26; /* Red-Orange color for border */
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background-color: #ff5a36; /* Darker Red-Orange color on hover */
+    border-color: #ff5a36; /* Darker Red-Orange color for border on hover */
+}
